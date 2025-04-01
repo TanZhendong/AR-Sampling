@@ -38,18 +38,31 @@ dataset_split: "test"
 output_dir: "outputs/math500/ar_bon" 
 ```
 
-- model_path: model_path for proposer model
-- prm_path: model_path for verifier model (PRM)
-- gpu_memory_utilization: the proportion of GPU memory usage for the proposer model, and the remaining is for the verifier.
-- n: $N$ for scaling
-- p: threshold $p$ in paper
-- max_rethink: parameter $m$ in paper
-- dataset_name: dataset name for test
-- dataset_split: dataset split for test
-- output_dir: the results output directory
+- model_path: Model_path for proposer model.
+- prm_path: Model_path for verifier model (PRM).
+- gpu_memory_utilization: The proportion of GPU memory usage for the proposer model, and the remaining is for the verifier. We just need 1 GPU for running.
+- n: For one question, LLMs will generate $N$ solutions.
+- p: Threshold $p$ in paper. When PRM score is lower than $p$, we will add the trigger sentence.
+- max_rethink: Parameter $m$ in paper. For one step, LLMs will rethink no more than $m$ times.
+- dataset_name: Dataset name for test.
+- dataset_split: Dataset split for test.
+- output_dir: The results output directory.
 
 Tips: For models not in Llama3 family, we recommend setting the `custom_chat_template: null`.
 
-## Acknowledgement
+## Outputs
+The output is a dataset that includes the keys from the original datasets.  
+Several new key columns have been added:
+- completions: All of the solutions.
+- scores: All of the per-step scores for solutions.
+- pred: The parsed prediction answer of $N$ solutions.
+- agg_scores: The aggregated scores of each solution.
+- pred_weighted@N: The parsed answer using weighted best of N sampling.
+- pred_maj@N: The parsed answer using self-consistency.
+- pred_naive@N: The parsed answer using best of N sampling.
 
+## Evaluation
+For evaluation of the outputs, refer to a [fork](https://github.com/huggingface/Qwen2.5-Math) from [Qwen2.5-Math](https://github.com/QwenLM/Qwen2.5-Math).
+
+## Acknowledgement
 This repository is build upon the [Huggingface-Search-and-Learn](https://github.com/huggingface/search-and-learn) repositories. Thanks for their excellent work!
