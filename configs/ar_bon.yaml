@@ -1,0 +1,17 @@
+# refer to src/sal/config.py for more options
+
+approach: ar_bon
+n: 16
+search_batch_size: 1
+sort_completed: true
+filter_duplicates: true
+# num_samples: 5         # REMOVE THIS LINE TO RUN ON THE WHOLE DATASET
+seed: 0
+max_tokens: 1024
+model_path: "meta-llama/Llama-3.2-1B-Instruct"
+prm_path: "RLHFlow/Llama3.1-8B-PRM-Deepseek-Data"
+gpu_memory_utilization: 0.4
+p: 0.3
+max_rethink: 1
+dataset_name: "HuggingFaceH4/MATH-500"
+dataset_split: "test"
