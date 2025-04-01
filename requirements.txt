@@ -1,0 +1,12 @@
+accelerate
+pebble
+latex2sympy2==1.9.1
+word2number
+transformers>=4.47.0
+fastapi
+hf_transfer
+
+ruff
+isort
+pytest
+vllm==0.6.3
